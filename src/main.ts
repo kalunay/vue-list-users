@@ -1,9 +1,8 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import WaveUI from 'wave-ui'
 import 'wave-ui/dist/wave-ui.css'
+import 'font-awesome/css/font-awesome.min.css'
 
 import App from './App.vue'
 import router from './router'
