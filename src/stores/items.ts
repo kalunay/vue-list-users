@@ -17,14 +17,12 @@ export const useItemsStore = defineStore('itemsStore', () => {
 
   // получаем список
   const getItems = () => {
+      const itemsOnLocalStorage = localStorage.getItem("items");
       items.value = JSON.parse(itemsOnLocalStorage);
       items.value.map((item) => {
           item.name = formatName(item.name);
       });
   }
-
-  const itemsOnLocalStorage = localStorage.getItem("items");
-  if(itemsOnLocalStorage) getItems();  
 
   // добавляем пустой элемент
   const addItems = () => {
@@ -38,34 +36,37 @@ export const useItemsStore = defineStore('itemsStore', () => {
     items.value.push(emptyItem);
   }
 
+  const nameToObject = (name: string) => {
+    const arr = [];    
+    name.split(';').map((item) => {
+        arr.push({'text': item});
+    });
+    return arr;
+  }
+
   // обновляем
   const updateItems = (item: object) => {
-    console.log(item);
     items.value.find((obj) => {
         if(obj.id === item.id){
-            const arr = [];
-            item.name.split(';').map((item) => {
-                arr.push({'text': item});
-            });
             obj.id = item.id;
-            obj.name = arr;
+            obj.name = nameToObject(item.name);
             obj.type = item.type;
             obj.login = item.login;
             obj.password = item.password;
+        } else {
+            obj.name = nameToObject(obj.name);
         }
     });
     localStorage.setItem('items', JSON.stringify(items.value));
+    getItems();
   }
 
   // удаляем
   const deleteItem = (id: number) => {
     items.value = items.value.filter(item => item.id !== id);
     localStorage.setItem('items', JSON.stringify(items.value));
+    getItems();
   }
 
-  watch(() => items, (state) => {
-    getItems();
-  }, {deep: true});
-
-  return { items, addItems, updateItems, deleteItem }
+  return { items, addItems, updateItems, deleteItem, getItems }
 })

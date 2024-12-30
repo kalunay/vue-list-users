@@ -38,7 +38,7 @@
 
 <template>
     <w-flex wrap class="items mt3" gap="2">
-        <div class="box xs2">
+        <div class="box xs3">
             <w-input
                 outline
                 v-model="item.name"

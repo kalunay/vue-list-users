@@ -2,6 +2,7 @@
   import { useItemsStore } from '../stores/items'
   import item from '@/components/item.vue';
   const itemsStore = useItemsStore();
+  itemsStore.getItems();
 </script>
 
 <template>
@@ -24,7 +25,7 @@
             <i class="fa fa-question-circle-o" aria-hidden="true"></i> Для указаниея нескольких меток для одной пары логин\пароль используйте разделитель ;
           </w-alert>
           <w-flex wrap class="wrapper grey-light3" gap="2">
-            <div class="box xs2">Метка</div>
+            <div class="box xs3">Метка</div>
             <div class="box xs2">Тип записи</div>
             <div class="box xs2">Логин</div>
             <div class="box xs2">Пароль</div>
