@@ -23,13 +23,13 @@
           <w-alert class="text-left">
             <i class="fa fa-question-circle-o" aria-hidden="true"></i> Для указаниея нескольких меток для одной пары логин\пароль используйте разделитель ;
           </w-alert>
-          <w-grid columns="5" class="wrapper grey-light3" gap="2">
-            <div class="box">Метка</div>
-            <div class="box">Тип записи</div>
-            <div class="box">Логин</div>
-            <div class="box">Пароль</div>
-            <div class="box"></div>
-          </w-grid>     
+          <w-flex wrap class="wrapper grey-light3" gap="2">
+            <div class="box xs2">Метка</div>
+            <div class="box xs2">Тип записи</div>
+            <div class="box xs2">Логин</div>
+            <div class="box xs2">Пароль</div>
+            <div class="box xs1"></div>
+          </w-flex>     
 
           <item
             v-for="item in itemsStore.items"

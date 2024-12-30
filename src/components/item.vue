@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { computed, ref } from 'vue';
     import { useItemsStore } from '@/stores/items'
 
     interface Props {
@@ -33,11 +33,12 @@
             itemsStore.updateItems(props.item);
         }
     }
+
 </script>
 
 <template>
-    <w-grid columns="5" class="wrapper items mt3" gap="2">
-        <div class="box">
+    <w-flex wrap class="items mt3" gap="2">
+        <div class="box xs2">
             <w-input
                 outline
                 v-model="item.name"
@@ -46,7 +47,7 @@
             >
             </w-input>
         </div>
-        <div class="box">
+        <div class="box xs2">
             <w-select
                 :items="items"
                 outline
@@ -55,7 +56,10 @@
                 tile>
             </w-select>
         </div>
-        <div class="box">
+        <div 
+            class="box xs2"
+            :class="{'width2' : item.type === 'LDAP'}"
+        >
             <w-input
                 outline
                 v-model="item.login"
@@ -64,7 +68,10 @@
             >
             </w-input>
         </div>
-        <div class="box">
+        <div 
+            class="box xs2"
+            v-if="item.type !== 'LDAP'"
+        >
             <w-input
                 type="password"
                 outline
@@ -74,14 +81,14 @@
             >
             </w-input>
         </div>
-        <div class="box">
+        <div class="box xs1">
             <i 
                 class="fa fa-trash-o" 
                 aria-hidden="true"
                 @click="itemsStore.deleteItem(item.id)"
             ></i>
         </div>
-    </w-grid>          
+    </w-flex>          
 </template>
 
 <style>
@@ -94,5 +101,8 @@
     }
     .error input {
         border: #f00 solid 1px;
+    }
+    .width2 {
+        width: 34.5% !important;
     }
 </style>
