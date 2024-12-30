@@ -1,8 +1,13 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useItemsStore = defineStore('itemsStore', () => {
   const items = ref([]);
+
+  const itemsOnLocalStorage = localStorage.getItem("items");
+  if(itemsOnLocalStorage){
+    items.value = JSON.parse(itemsOnLocalStorage);
+  }
 
   const addItems = () => {
     const emptyItem = {
@@ -26,6 +31,10 @@ export const useItemsStore = defineStore('itemsStore', () => {
   const deleteItem = (id: number) => {
     items.value = items.value.filter(item => item.id !== id);
   }
+
+  watch(() => items, (state) => {
+        localStorage.setItem('items', JSON.stringify(state.value));
+  }, {deep: true});
 
   return { items, addItems, updateItems, deleteItem }
 })

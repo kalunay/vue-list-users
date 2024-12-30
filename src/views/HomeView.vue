@@ -21,7 +21,7 @@
             >+</w-button>
           </div>
           <w-alert class="text-left">
-            Для указаниея нескольких меток для одной пары логин\пароль используйте разделитель ;
+            <i class="fa fa-question-circle-o" aria-hidden="true"></i> Для указаниея нескольких меток для одной пары логин\пароль используйте разделитель ;
           </w-alert>
           <w-grid columns="5" class="wrapper grey-light3" gap="2">
             <div class="box">Метка</div>
@@ -31,7 +31,6 @@
             <div class="box"></div>
           </w-grid>     
 
-          {{ itemsStore.items }}
           <item
             v-for="item in itemsStore.items"
             :key="item"
