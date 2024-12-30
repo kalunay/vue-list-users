@@ -2,12 +2,6 @@
   import { useItemsStore } from '../stores/items'
   import item from '@/components/item.vue';
   const itemsStore = useItemsStore();
-  const emptyItem = {
-    name: '',
-    type: '',
-    login: '',
-    password: ''
-  }
 </script>
 
 <template>
@@ -23,7 +17,7 @@
               color="primary" 
               outline 
               xl
-              @click="itemsStore.addItems(emptyItem)"
+              @click="itemsStore.addItems()"
             >+</w-button>
           </div>
           <w-alert class="text-left">
@@ -35,8 +29,15 @@
             <div class="box">Логин</div>
             <div class="box">Пароль</div>
             <div class="box"></div>
-          </w-grid>         
-          <item />
+          </w-grid>     
+
+          {{ itemsStore.items }}
+          <item
+            v-for="item in itemsStore.items"
+            :key="item"
+            :item="item"
+          />
+
         </div>
       </div>
       <div class="xs2 pa1"></div>
